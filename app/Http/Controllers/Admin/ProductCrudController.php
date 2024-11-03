@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\ProductRequest;
+use App\Http\Requests\Product\ProductRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -39,7 +39,6 @@ class ProductCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        // Simple columns
         CRUD::column('name');
         CRUD::column('description');
         CRUD::column('price')
@@ -47,21 +46,18 @@ class ProductCrudController extends CrudController
             ->decimals(2)
             ->prefix('$');
 
-        // Category relationship
         CRUD::column('category_id')
             ->type('select')
             ->label('Category')
             ->entity('category')
             ->attribute('name');
 
-        // Image column
         CRUD::column('image')
             ->type('image')
             ->height('50px')
             ->width('50px')
             ->prefix('storage/');
 
-        // Status column
         CRUD::column('status')
             ->type('enum');
         /**

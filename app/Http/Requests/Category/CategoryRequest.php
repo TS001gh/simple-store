@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Category;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CategoryRequest extends FormRequest
 {
@@ -23,6 +24,13 @@ class CategoryRequest extends FormRequest
     {
         return [
             //
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('products', 'name')->ignore($this->product),
+            ],
+            'description' => 'nullable|string',
         ];
     }
 }
