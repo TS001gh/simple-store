@@ -21,7 +21,7 @@ class UserCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -33,13 +33,14 @@ class UserCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
     protected function setupListOperation()
     {
         CRUD::setFromDb(); // set columns from db columns.
+        CRUD::column('role')->type('enum');
 
         /**
          * Columns can be defined using the fluent syntax:
@@ -49,14 +50,21 @@ class UserCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
     protected function setupCreateOperation()
     {
+        $user = backpack_user();
         CRUD::setValidation(UserRequest::class);
         CRUD::setFromDb(); // set fields from db columns.
+        CRUD::field('role')
+            ->type('select_from_array')
+            ->options([
+                'admin' => $user->role === 'admin' ? 'admin' : '',
+                'user' => 'user'
+            ])->default('user');
 
         /**
          * Fields can be defined using the fluent syntax:
@@ -66,7 +74,7 @@ class UserCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Policies\ProductPolicy;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -23,9 +24,26 @@ class Product extends Model
         'status'
     ];
 
+    // protected static function boot()
+    // {
+    //     parent::boot();
+
+    //     static::creating(function ($product) {
+    //         if (!$product->user_id) {
+    //             $product->user_id = backpack_user()->id;
+    //         }
+    //     });
+    // }
+
+
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function setImageAttribute($value)

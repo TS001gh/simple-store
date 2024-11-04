@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\Category\CategoryRequest;
 use App\Models\Category;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Class CategoryCrudController
@@ -30,6 +31,12 @@ class CategoryCrudController extends CrudController
         CRUD::setModel(Category::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/category');
         CRUD::setEntityNameStrings('category', 'categories');
+
+        $this->crud->addField([
+            'name' => 'user_id',
+            'type' => 'hidden',
+            'value' => backpack_user()->id,
+        ]);
     }
 
     /**

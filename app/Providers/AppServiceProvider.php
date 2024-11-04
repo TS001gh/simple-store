@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\User;
 use App\Observers\ProductObserver;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider

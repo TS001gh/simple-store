@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\Product\ProductRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\Gate;
 
 /**
  * Class ProductCrudController
@@ -29,6 +30,12 @@ class ProductCrudController extends CrudController
         CRUD::setModel(\App\Models\Product::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/product');
         CRUD::setEntityNameStrings('product', 'products');
+
+        $this->crud->addField([
+            'name' => 'user_id',
+            'type' => 'hidden',
+            'value' => backpack_user()->id,
+        ]);
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdminRoleMiddleware;
 use Illuminate\Support\Facades\Route;
 
 // --------------------------
@@ -15,8 +16,11 @@ Route::group([
         (array) config('backpack.base.middleware_key', 'admin')
     ),
     'namespace' => 'App\Http\Controllers\Admin',
-], function () { // custom admin routes
-    Route::crud('user', 'UserCrudController');
+], function () {
+
+    Route::middleware(AdminRoleMiddleware::class)->group(function () {
+        Route::crud('user', 'UserCrudController');
+    });
     Route::crud('category', 'CategoryCrudController');
     Route::crud('product', 'ProductCrudController');
 }); // this should be the absolute last line of this file
