@@ -1,0 +1,72 @@
+/* التنسيق الأساسي للحاوية */
+.breadcrumb {
+    direction: rtl;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-items: center;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    border-radius: 0.25rem;
+    float: inline-start;
+}
+
+.breadcrumb-item {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+
+    & + .breadcrumb-item::before {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        content: "/";
+        float: right;
+    }
+
+    & .breadcrumb-item:first-child::before {
+        display: none;
+    }
+
+    & .breadcrumb-item a {
+        text-decoration: none;
+    }
+
+    & .breadcrumb-item:not(:last-child) {
+        margin-left: 0.5rem;
+    }
+}
+
+.nav-item .dropdown-toggle {
+    display: flex;
+    align-items: center;
+    margin-right: 20px !important;
+}
+
+.dropdown-menu {
+    text-align: right;
+    direction: rtl;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    text-align: end;
+    justify-content: flex-start;
+}
+
+.dropdown-item i {
+    margin-left: 10px;
+    font-size: 1.2em;
+    margin-top: 5px;
+}
+
+.backpack-avatar-menu-container {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 8px;
+}
+
+/* .container-xl {
+    display: none !important;
+} */

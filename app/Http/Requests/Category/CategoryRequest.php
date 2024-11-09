@@ -28,7 +28,8 @@ class CategoryRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('products', 'name')->ignore($this->product),
+                'alpha:ascii',
+                Rule::unique('categories', 'name')->ignore($this->product),
             ],
             'description' => 'nullable|string',
         ];

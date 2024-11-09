@@ -40,7 +40,7 @@ return [
         // "ar_SD" => "Arabic (Sudan)",
         // "ar_SY" => "Arabic (Syria)",
         // "ar_TN" => "Arabic (Tunisia)",
-        // "ar_AE" => "Arabic (United Arab Emirates)",
+        "ar_AE" => "Arabic (United Arab Emirates)",
         // "ar_YE" => "Arabic (Yemen)",
         // "ar" => "Arabic",
         // "hy_AM" => "Armenian (Armenia)",
@@ -176,7 +176,7 @@ return [
         // "fr_SN" => "French (Senegal)",
         // "fr_CH" => "French (Switzerland)",
         // "fr_TG" => "French (Togo)",
-        'fr' => 'French',
+        // 'fr' => 'French',
         // "ff_SN" => "Fulah (Senegal)",
         // "ff" => "Fulah",
         // "gl_ES" => "Galician (Spain)",
@@ -222,7 +222,7 @@ return [
         // "ga" => "Irish",
         // "it_IT" => "Italian (Italy)",
         // "it_CH" => "Italian (Switzerland)",
-        'it' => 'Italian',
+        // 'it' => 'Italian',
         // "ja_JP" => "Japanese (Japan)",
         // "ja" => "Japanese",
         // "kea_CV" => "Kabuverdianu (Cape Verde)",
@@ -327,7 +327,7 @@ return [
         // "pa" => "Punjabi",
         // "ro_MD" => "Romanian (Moldova)",
         // "ro_RO" => "Romanian (Romania)",
-        'ro' => 'Romanian',
+        // 'ro' => 'Romanian',
         // "rm_CH" => "Romansh (Switzerland)",
         // "rm" => "Romansh",
         // "rof_TZ" => "Rombo (Tanzania)",
@@ -451,6 +451,9 @@ return [
         // "zu_ZA" => "Zulu (South Africa)",
         // "zu" => "Zulu"
     ],
+    // Set the default language for the CRUD interface
+    'default_language' => 'ar',
+
 
     'view_namespaces' => [
         'buttons' => [

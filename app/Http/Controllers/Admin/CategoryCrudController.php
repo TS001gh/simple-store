@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\Category\CategoryRequest;
 use App\Models\Category;
+use App\Models\Product;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Support\Facades\Gate;
@@ -30,13 +31,7 @@ class CategoryCrudController extends CrudController
     {
         CRUD::setModel(Category::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/category');
-        CRUD::setEntityNameStrings('category', 'categories');
-
-        $this->crud->addField([
-            'name' => 'user_id',
-            'type' => 'hidden',
-            'value' => backpack_user()->id,
-        ]);
+        CRUD::setEntityNameStrings(trans('categories.category'), trans('categories.categories'));
     }
 
     /**
@@ -48,6 +43,25 @@ class CategoryCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::setFromDb(); // set columns from db columns.
+
+        // Override specific columns with translations
+        CRUD::modifyColumn('name', [
+            'label' => trans('categories.name')
+        ]);
+
+        CRUD::modifyColumn('description', [
+            'label' => trans('categories.description')
+        ]);
+
+        // Add the custom user column with translation
+        CRUD::addColumn([
+            'name' => 'user_id',
+            'type' => 'select',
+            'entity' => 'user',
+            'attribute' => 'name',
+            'model' => "App\Models\User",
+            'label' => trans('categories.created_by'),
+        ]);
 
         /**
          * Columns can be defined using the fluent syntax:
@@ -65,6 +79,26 @@ class CategoryCrudController extends CrudController
     {
         CRUD::setValidation(CategoryRequest::class);
         CRUD::setFromDb(); // set fields from db columns.
+
+
+        // Override specific fields with translations
+        CRUD::modifyField('name', [
+            'label' => trans('categories.name'),
+            'type' => 'text',
+            'wrapper' => ['class' => 'form-group col-md-6']
+        ]);
+
+        CRUD::modifyField('description', [
+            'label' => trans('categories.description'),
+            'type' => 'textarea',
+            'wrapper' => ['class' => 'form-group col-md-12']
+        ]);
+
+        Category::creating(function ($entry) {
+            $entry->user_id = backpack_user()->id;
+        });
+
+
 
         /**
          * Fields can be defined using the fluent syntax:

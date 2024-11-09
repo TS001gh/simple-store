@@ -124,4 +124,12 @@ return [
     ],
 
 
+    // 'providers' => [
+    //     // Other service providers...
+
+    //     ConsoleTVs\Charts\ChartsServiceProvider::class,
+    // ],
+
+
+
 ];

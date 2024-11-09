@@ -22,7 +22,7 @@ return [
      * Possible values: horizontal, horizontal_dark, horizontal_overlap, vertical,
      * vertical_dark, vertical_transparent (legacy theme), right_vertical, right_vertical_dark, right_vertical_transparent
      */
-    'layout' => 'vertical_dark',
+    'layout' => 'right_vertical_dark',
 
     /**
      * Pick a login page layout.
@@ -149,16 +149,9 @@ return [
          */
         'footer' => null,
 
-        /**
-         * Use this to pass classes to the table displayed in List Operation
-         * It defaults to: "table table-striped table-hover nowrap rounded card-table table-vcenter card-table shadow-xs border-xs"
-         */
-        'table' => null,
+        'table' => 'table table-striped table-hover nowrap rounded card-table table-vcenter card-table shadow-xs border-xs',
+        'tableWrapper' => 'text-right',  // Optional: add right alignment for wrapper if needed
 
-        /**
-         * Use this to pass classes to the table wrapper component displayed in List Operation
-         */
-        'tableWrapper' => null,
     ],
 
     /**

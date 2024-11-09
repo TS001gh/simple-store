@@ -24,17 +24,6 @@ class Product extends Model
         'status'
     ];
 
-    // protected static function boot()
-    // {
-    //     parent::boot();
-
-    //     static::creating(function ($product) {
-    //         if (!$product->user_id) {
-    //             $product->user_id = backpack_user()->id;
-    //         }
-    //     });
-    // }
-
 
     public function category()
     {

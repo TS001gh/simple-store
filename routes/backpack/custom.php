@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Middleware\AdminRoleMiddleware;
+use App\Http\Middleware\CheckOwner;
+use App\Http\Middleware\CheckProductOwner;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 // --------------------------
@@ -18,11 +22,17 @@ Route::group([
     'namespace' => 'App\Http\Controllers\Admin',
 ], function () {
 
-    Route::middleware(AdminRoleMiddleware::class)->group(function () {
-        Route::crud('user', 'UserCrudController');
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::middleware(['verified'])->group(function () {
+        Route::middleware(AdminRoleMiddleware::class)->group(function () {
+            Route::crud('user', 'UserCrudController');
+        });
+        Route::middleware(CheckOwner::class)->group(function () {
+            Route::crud('category', 'CategoryCrudController');
+            Route::crud('product', 'ProductCrudController');
+        });
     });
-    Route::crud('category', 'CategoryCrudController');
-    Route::crud('product', 'ProductCrudController');
 }); // this should be the absolute last line of this file
 
 /**

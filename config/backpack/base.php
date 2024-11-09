@@ -60,7 +60,7 @@ return [
     // Make sure your user model implements the MustVerifyEmail contract and your database
     // table contains the `email_verified_at` column. Read the following before enabling:
     // https://backpackforlaravel.com/docs/6.x/base-how-to#enable-email-verification-in-backpack-routes
-    'setup_email_verification_routes' => false,
+    'setup_email_verification_routes' => true,
 
     // When email verification is enabled, automatically add the Verified middleware to Backpack routes?
     // Set false if you want to use your own Verified middleware in `middleware_class`.
@@ -114,12 +114,15 @@ return [
         App\Http\Middleware\CheckIfAdmin::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
         \Backpack\CRUD\app\Http\Middleware\AuthenticateSession::class,
+        \Backpack\CRUD\app\Http\Middleware\EnsureEmailVerification::class,
         // \Backpack\CRUD\app\Http\Middleware\UseBackpackAuthGuardInsteadOfDefaultAuthGuard::class,
     ],
 
     // Alias for that middleware
     'middleware_key' => 'admin',
     // Note: It's recommended to use the backpack_middleware() helper everywhere, which pulls this key for you.
+
+    'setup_email_validation_routes' => true,
 
     // Username column for authentication
     // The Backpack default is the same as the Laravel default (email)
@@ -173,6 +176,9 @@ return [
     // By wrapping in a database transaction you ensure that either all queries went ok, or if some failed the whole process
     // is rolled back and considered failed. This is a good setting for data integrity.
     'useDatabaseTransactions' => false,
+    'locale' => 'ar',
+    'view_namespace' => 'backpack::',
+
 
     /*
     |--------------------------------------------------------------------------
