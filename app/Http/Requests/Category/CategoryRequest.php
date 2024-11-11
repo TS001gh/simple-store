@@ -28,7 +28,7 @@ class CategoryRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                'alpha:ascii',
+                'regex:/^[\p{L}\s]+$/u', // يتحقق من أن الحقل يحتوي على أحرف فقط
                 Rule::unique('categories', 'name')->ignore($this->product),
             ],
             'description' => 'nullable|string',

@@ -25,13 +25,10 @@ class CheckOwner
         $excludedActions = ['index', 'show'];
 
         if (in_array($action, $excludedActions)) {
-            // Check if the action is in the excluded actions
             return $next($request);
         }
-        // Retrieve the ID from the route
         $id = $request->route('id');
 
-        // Determine if the route is for a product or category and retrieve the model accordingly
         $model = null;
 
         // dd(backpack_user()->id);

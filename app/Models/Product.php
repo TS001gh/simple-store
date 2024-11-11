@@ -6,6 +6,7 @@ use App\Policies\ProductPolicy;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -23,6 +24,17 @@ class Product extends Model
         'image',
         'status'
     ];
+
+    protected static function booted()
+    {
+        static::saved(function () {
+            Cache::forget('dashboard_stats');
+        });
+
+        static::deleted(function () {
+            Cache::forget('dashboard_stats');
+        });
+    }
 
 
     public function category()

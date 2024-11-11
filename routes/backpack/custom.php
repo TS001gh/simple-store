@@ -1,10 +1,9 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\EmailVerificationController;
 use App\Http\Middleware\AdminRoleMiddleware;
 use App\Http\Middleware\CheckOwner;
-use App\Http\Middleware\CheckProductOwner;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 
 // --------------------------
@@ -35,6 +34,21 @@ Route::group([
     });
 }); // this should be the absolute last line of this file
 
+
+// Display the email verification notice
+// Route::get('/admin/email/verify', [EmailVerificationController::class, 'showVerificationNotice'])
+//     ->middleware('auth')
+//     ->name('verification.notice');
+
+// // Handle the email verification link
+// Route::get('/admin/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
+//     ->middleware(['auth', 'signed'])
+//     ->name('verification.verify');
+
+// // Resend the email verification notification
+// Route::post('/admin/email/resend', [EmailVerificationController::class, 'resend'])
+//     ->middleware(['auth', 'throttle:6,1'])
+//     ->name('verification.resend');
 /**
  * DO NOT ADD ANYTHING HERE.
  */

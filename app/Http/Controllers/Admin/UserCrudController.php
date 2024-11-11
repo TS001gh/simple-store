@@ -24,7 +24,6 @@ class UserCrudController extends CrudController
         store as traitStore;
     }
 
-
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
      *
@@ -54,23 +53,8 @@ class UserCrudController extends CrudController
                 'admin' => trans('users.admin_user'),
                 'user' => trans('users.simple_user')
             ]);
-        /**
-         * Columns can be defined using the fluent syntax:
-         * - CRUD::column('price')->type('number');
-         */
     }
-    public function store()
-    {
-        $response = $this->traitStore();
 
-        // Send verification email after successful user creation
-        // Get the newly created user
-        if ($this->crud->entry) {
-            $user = $this->crud->entry;
-            $user->notify(new AdminCreatedUserNotification());
-        }
-        return $response;
-    }
     /**
      * Define what happens when the Create operation is loaded.
      *
@@ -95,7 +79,6 @@ class UserCrudController extends CrudController
             ->label(trans('users.password'))
             ->type('password');
 
-
         CRUD::field('role')
             ->label(trans('users.role'))
             ->type('select_from_array')
@@ -104,11 +87,29 @@ class UserCrudController extends CrudController
                 'user' => trans('users.simple_user')
             ])
             ->default('user');
+    }
 
-        /**
-         * Fields can be defined using the fluent syntax:
-         * - CRUD::field('price')->type('number');
-         */
+    /**
+     * Handle storing of the user data (create operation).
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function store(UserRequest $request)
+    {
+        // Call the parent store method to create the user
+        $response = $this->traitStore();
+
+        // After successfully creating the user, send the email verification notification
+        if ($this->crud->entry) {
+            $user = $this->crud->entry;
+
+            // Send the email verification notification
+            $user->sendEmailVerificationNotification();
+        }
+
+        // Return the response from the original store method
+        return $response;
     }
 
     /**

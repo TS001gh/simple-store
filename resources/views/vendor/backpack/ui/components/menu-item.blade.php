@@ -4,7 +4,7 @@
             <i class="nav-icon {{ $icon }} d-block d-lg-none d-xl-block"></i>
         @endif
         @if ($title != null)
-            <span>{{ $title }}</span>
+            <span>{{ $title }} ttttt</span>
         @endif
     </a>
 </li>

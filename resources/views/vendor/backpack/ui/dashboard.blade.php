@@ -23,6 +23,7 @@
 
 @section('content')
     <div class="row d-inline-flex">
+
         @foreach ($stats as $stat)
             <x-stats-card :title="$stat['title']" :count="$stat['count']" :total="$stat['total']" :percentage="$stat['percentage']" :icon="$stat['icon']"
                 :color="$stat['color']" />

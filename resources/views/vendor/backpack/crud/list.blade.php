@@ -37,6 +37,7 @@
                     @endif
                 </div>
 
+
                 @if (session('error'))
                     <section class="w-75 my-2">
                         @if (session('error'))

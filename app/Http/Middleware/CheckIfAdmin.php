@@ -59,8 +59,16 @@ class CheckIfAdmin
             return $this->respondToUnauthorizedRequest($request);
         }
 
-        if (! $this->checkIfUserIsAdmin(backpack_user())) {
+        $user = backpack_user();
+
+        // Check if the user is an admin
+        if (! $this->checkIfUserIsAdmin($user)) {
             return $this->respondToUnauthorizedRequest($request);
+        }
+
+        // Check if the user has verified their email
+        if (! $user->hasVerifiedEmail()) {
+            return redirect()->route('verification.notice');
         }
 
         return $next($request);
